@@ -1,0 +1,25 @@
+{
+  "name": "unit-testing",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "mocha src/tests/*.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "chai": "^4.3.10", 
+    "chai-http": "^4.4.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mocha": "^11.0.1",
+    "mongoose": "^8.9.3",
+    "supertest": "^7.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
