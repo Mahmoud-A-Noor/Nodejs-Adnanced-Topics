@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebSocket Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    #messages {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #e0f7fa;
+      border-radius: 5px;
+      color: #00796b;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>WebSocket Example</h1>
+    <p>Listening for messages from the server...</p>
+    <div id="messages"></div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    // Establish a WebSocket connection to the server
+    const socket = io();
+
+    // Listen for messages from the server
+    socket.on('message', (data) => {
+      const messagesDiv = document.getElementById('messages');
+      const newMessage = document.createElement('p');
+      newMessage.textContent = data; // Display the message
+      messagesDiv.appendChild(newMessage);
+    });
+
+    // Handle any connection errors
+    socket.on('connect_error', (error) => {
+      console.error('Connection error:', error);
+    });
+  </script>
+  
+</body>
+</html>

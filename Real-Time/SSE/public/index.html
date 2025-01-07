@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Server Sent Events Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    #events {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #e0f7fa;
+      border-radius: 5px;
+      color: #00796b;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Server Sent Events</h1>
+    <p>Listening for events from the server...</p>
+    <div id="events"></div>
+  </div>
+
+  <script>
+    // Establish a connection to the /events endpoint
+    const eventSource = new EventSource('/events');
+
+    // Listen for messages from the server
+    eventSource.onmessage = (event) => {
+      const eventsDiv = document.getElementById('events');
+      const newEvent = document.createElement('p');
+      newEvent.textContent = event.data; // Display the event data
+      eventsDiv.appendChild(newEvent);
+    };
+
+    // Handle any errors
+    eventSource.onerror = (error) => {
+      console.error('Error occurred:', error);
+      eventSource.close(); // Close the connection if there's an error
+    };
+  </script>
+  
+</body>
+</html>
